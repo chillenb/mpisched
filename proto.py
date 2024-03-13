@@ -4,11 +4,7 @@ from mpi4py import MPI
 import mpisched.srv
 import inspect
 import os
-
 import sys
-
-def printsrv():
-    print("Server here")
 
 if __name__ == '__main__':
 
@@ -33,6 +29,7 @@ if __name__ == '__main__':
         server_rank = commoncomm.recv(source=MPI.ANY_SOURCE, tag=0)
         print("The server rank is %d" % server_rank)
     
+    # Now all ranks know the server rank.
     server_rank = commoncomm.bcast(server_rank, root=0)
     
     print("Rank %d thinks the server rank is %d" % (rank, server_rank))
@@ -40,5 +37,6 @@ if __name__ == '__main__':
     print("Common has size %d and rank %d" % (commoncomm.Get_size(), commoncomm.Get_rank()))
     sys.stdout.flush()
     
+    # Need to free commoncomm to avoid complaints from MPI
     commoncomm.Free()
     MPI.Finalize()
