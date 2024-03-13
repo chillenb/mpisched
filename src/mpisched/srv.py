@@ -19,3 +19,6 @@ if __name__ == '__main__':
     commoncomm.bcast(commoncomm_rank, root=0)
 
     print("Now my rank is %d" % commoncomm.Get_rank())
+    
+    commoncomm.Free()
+    MPI.Finalize()

@@ -39,3 +39,6 @@ if __name__ == '__main__':
 
     print("Common has size %d and rank %d" % (commoncomm.Get_size(), commoncomm.Get_rank()))
     sys.stdout.flush()
+    
+    commoncomm.Free()
+    MPI.Finalize()
